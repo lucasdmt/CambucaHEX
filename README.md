@@ -39,13 +39,13 @@ any two unknown HEX characters anywhere in the key.
 | `-h, --help`        | Show the help message.                                                                           |
 
 
-# linear
+#### linear
 ./CambucaHEX -l -p 4 -k e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 
-# Combination mode
+#### Combination mode
 ./CambucaHEX -c -p 2 -k e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 
-# Scattered HEX mode
+#### Scattered HEX mode
 ./CambucaHEX -x -k e3b0c44298fc1c149afbf4c8996fb92427ae41ex649b934ca49x991bx85xbx5x
 
 ## :x: When NOT to use CambucaHEX
