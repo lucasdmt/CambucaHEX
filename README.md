@@ -29,6 +29,25 @@ The value of `-p` defines how many corrupted characters may exist,
 independent of their position. For example, `-p 2` searches for
 any two unknown HEX characters anywhere in the key.
 
+| Option              | Description                                                                                      |
+| ------------------- | ------------------------------------------------------------------------------------------------ |
+| `-x, --hexx`        | Scattered HEX mode. Use when unknown characters are distributed; mark unknowns with `x`.         |
+| `-l, --linear`      | Sliding window scan over consecutive HEX positions (experimental concept mode).                  |
+| `-c, --combination` | Tests all combinations of unknown positions; use `-p` to set how many characters may be unknown. |
+| `-p N`              | Number of unknown HEX characters (used with `-c` and `-l`).                                      |
+| `-k HEX`            | Partial key. If not provided, `chave.txt` will be used.                                          |
+| `-h, --help`        | Show the help message.                                                                           |
+
+
+# linear
+./CambucaHEX -l -p 4 -k e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+# Combination mode
+./CambucaHEX -c -p 2 -k e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+# Scattered HEX mode
+./CambucaHEX -x -k e3b0c44298fc1c149afbf4c8996fb92427ae41ex649b934ca49x991bx85xbx5x
+
 ## :x: When NOT to use CambucaHEX
 - If the missing characters are **sequential or form a continuous range**, other specialized tools may be more efficient. CambucaHEX should be avoided **when it's possible to derive private keys from each-other.** <br> In such cases CambucaHEX is sub-optimal as it would be much quicker to re-use already calculated public keys.<br>
 - Bitcoin Puzzle (Where you have to simply increment the private key very quickly)<br>
