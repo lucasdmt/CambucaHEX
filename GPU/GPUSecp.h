@@ -13,9 +13,9 @@
 
 //CUDA-specific parameters that determine occupancy and thread-count
 //Please read more about them in CUDA docs and adjust according to your GPU specs
-#define BLOCKS_PER_GRID 20   //20
+#define BLOCKS_PER_GRID 20  //20
 #define THREADS_PER_BLOCK 256 //256 multiplo de 32!
-#define THREAD_MULT 100 //100 quantas seed cada thread vai calcular até terminar a iteração 
+#define THREAD_MULT 100 //100 quantas seed cada thread vai calcular até terminar a iteração
 
 //This is how many hashes are in NAME_HASH_FOLDER, Defined as constant to save one register in device kernel
 #define COUNT_INPUT_HASH 1
@@ -74,19 +74,23 @@ public:
 		const uint8_t * gTableXCPU,
 		const uint8_t * gTableYCPU,
 		const uint64_t * inputHashBufferCPU,
-		const uint8_t * privKeycpu,          //lucas		
+		const uint8_t * privKeyCPU,
     const int* posicoesCPU,      //lucas
     int totalPosicoesCPUtemp     //lucas
 		);
 
+ void updatemodohex(
+    const int* posicoesCPU,
+    int totalPosicoesCPU
+ );
 	void doIterationSecp256k1Books(int iteration);
 	void doPrintOutput();
 	void doFreeMemory();
 
 private:
 
-	uint8_t* d_privKeyCPU;								//lucas
-  int* d_posicoesCPU;						//lucas
+	uint8_t* privKeyGPU;
+  int* posicoesGPU;
   int d_totalPosicoesCPUtemp;		//lucas
 
 
