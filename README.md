@@ -7,8 +7,11 @@ Performs Secp256k1 Point Multiplication directly on GPU. <br/>
 ## :heavy_check_mark: When to use CambucaHEX
 CambucaHEX is designed for **private key recovery when hexadecimal characters are missing and scattered across the key**, rather than lost in a continuous or sequential range.  
 It is especially useful in scenarios where partial keys were corrupted, manually copied, or truncated at random positions.
-EXEMPLE:
+Example:
 <img width="1624" height="300" alt="exemple" src="https://github.com/user-attachments/assets/6c5dfba7-3e38-4893-a56e-55e3fb1b7a92" />
+
+
+
 ## :x: When NOT to use CambucaHEX
 - If the missing characters are **sequential or form a continuous range**, other specialized tools may be more efficient. CambucaHEX should be avoided **when it's possible to derive private keys from each-other.** <br> In such cases CambucaHEX is sub-optimal as it would be much quicker to re-use already calculated public keys.<br>
 - Bitcoin Puzzle (Where you have to simply increment the private key very quickly)<br>
@@ -53,11 +56,8 @@ Once you are satisfied with the test cases / performance, you can setup the data
 2. Use the `addr_to_hash.py` tool to convert chosen addresses into Hash160 files
 3. Create folder for holding real Hash160 files (you shouldn't mix them with the test hashes)
 4. Move your newly generated Hash160 files into the real Hash160 folder (they will be combined upon launch)
-5. Setup input data for specific mode:<br />
-  5.1. If using ModeBooks - Create folder with your desired Prime / Affix wordlists<br />
-  5.2. If using ModeCombo - Set your desired ASCII combination symbols in the `COMBO_SYMBOLS` buffer<br />
-7. Edit `GPU/GPUSecp.h` configuration values that have changed<br />
-8. Execute `make clean`, `make all` and `./CudaBrainSecp` to launch the application.
+5. Edit `GPU/GPUSecp.h` configuration values that have changed<br />
+6. Execute `make clean`, `make all` and `./Cambuca` to launch the application.
 
 ## :memo: Implementation
 ### Private Key Generation
@@ -100,15 +100,6 @@ Binary Search was used instead of Bloom Filter for multiple reasons:<br>
 
 There can still be false positives, since it's only 8 bytes, but the amount of false positives is less than Bloom Filter.<br>
 
-## :bar_chart: Performance
-![performanceV3](https://user-images.githubusercontent.com/8969128/184475356-b6cf5359-ae80-4b0d-8207-22fa6d419f78.png)
-
-### Comparison
-Performance was tested on two of my personal devices.<br>
-Results are quite interesting as Laptop RTX3060 performs slightly faster than Desktop RTX2070.<br>
-For simple kernel calculations it should be the other way around - desktop GPUs should perform faster.<br>
-However as explained in the next sections - kernel performance is heavily bottlenecked in several areas.<br>
-This is helped by Compute Capability 86 which adds useful optimizations over older generation CCAP 75<br>
 
 ### Alternatives
 At first glance the performance numbers may seem lower than other public Secp256k1 Cuda projects.<br>
@@ -138,11 +129,6 @@ Basically the threads have to wait until some device registers are finally avail
 
 ## :heavy_plus_sign: Optimizations
 ```diff
-+ Wordlists
-Current implementation of CudaSecp relies hevily on wordlists.
-I believe the current setup is efficient, as it only loads Affix word once, and Prime words should have coalescing.
-However the test setup only has 100 Prime words and with large amount of words you could encounter slower performance.
-If you plan on using large wordlists - consider splitting and passing them to GPU in smaller batches.
 
 + GTable Chunk Size
 It's possible to pre-compute different size chunks for the GTable.
@@ -193,13 +179,7 @@ Any support would be greatly appreciated.<br>
 - addr_to_hash Python tool designed by Pieter Wuille (Used to convert non-zero addresses to hash files)
 
 ## :grey_question: Frequently Asked Questions
-```What is the goal this project?```<br>
-Main goal was to help people who have forgotten or lost their seed phrase and can't access their funds.<br>
-More personal goal was to become familiar with CUDA and Secp256k1 algorithm.<br>
 
-```But shouldn't Seeds / PrivKeys be randomly generated?```<br>
-Yes, you should always use randomly generated seeds instead of a memorized phrase. <br>
-But this project can still be useful for people who have created / forgotten brain-wallet or seed phrase.<br>
 
 ```Why create new project if Cuda Secp256k1 Math Library already exists?``` <br />
 Because Secp256k1 Math Library doesn't actually do point multiplication on GPU. <br />
@@ -216,8 +196,3 @@ Thus this repository can also be used as general-purpose Secp256k1 point multipl
 ```Why is CUDA used instead of OpenCL?```<br />
 The GPU Math operations designed by Jean Luc PONS are written for CUDA GPUs.<br />
 It would be very hard to re-write them in OpenCL and have similar performance level.<br />
-
-```Why isn't Mnemonic Phrase recovery included in this repository?```<br />
-Mostly because there are many different implementations of mnemonic phrases / wallets.<br />
-Each crypto-exchange can use their own implementation with different salt / key-stretching / mnemonic-wordlists.<br />
-However if you have that information then it should be trivial to modify this repository for mnemonic wallet recovery.<br />
