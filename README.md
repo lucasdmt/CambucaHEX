@@ -170,8 +170,7 @@ So using the latest generation hardware & CUDA drivers has a big advantage.
 If this project is useful to you, you can support its development here:
 **Bitcoin (BTC): bc1qs850jrz5ktl5vwpma0sz40z29392wrzx9cevze
 
-This project is based on the original work created by **kpurens**.
-If you enjoy this project, please consider supporting the original author by buying them a coffee.  
+This project is based on the original work created by **kpurens**. Consider supporting the original author by buying them a coffee.  
 [Buy a coffee ☕](https://buymeacoffee.com/kpurens)
 
 
