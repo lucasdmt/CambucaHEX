@@ -662,7 +662,7 @@ int main(int argc, char **argv) {
 
     printf("Example:\n");
     printf("  %s -x -k e3b0c44298fc1c149afbf4c8996fb92427ae41ex649b934ca49x991bx85xbx5x\n", argv[0]);
-    printf("  %s -c -p 2 -k e3b0144298fc10149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n\n", argv[0]);
+    printf("  %s -c -p 2 -k e3b0144298fc10149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n", argv[0]);
     printf("  %s -l -p 4 -k e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b78501235\n\n", argv[0]);
 
     printf("Donations: bc1qs850jrz5ktl5vwpma0sz40z29392wrzx9cevze\n");
