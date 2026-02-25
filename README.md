@@ -170,7 +170,7 @@ This project is based on the original work created by **kpurens**.
 If you enjoy this project, please consider supporting the original author by buying them a coffee.  
 All credit for the base implementation belongs to them.
 Any support would be greatly appreciated ❤️
-[![coffeeSmol](https://user-images.githubusercontent.com/8969128/185217689-be09e29f-321f-4aaa-a20a-3a867a86d3f8.png)](https://buymeacoffee.com/kpurens)
+[![coffeeSmol]](https://buymeacoffee.com/kpure
 
 ### This Project (Modifications & Maintenance)
 If you appreciate the improvements, linear mode, scripts, or continued development of this version, you can support me here:
