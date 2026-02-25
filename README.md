@@ -184,6 +184,7 @@ If you appreciate the improvements, linear mode, scripts, or continued developme
 - [Secp256k1 Calculator](https://github.com/MrMaxweII/Secp256k1-Calculator) (Excellent tool for verifying / testing Secp256k1 calculations)
 - [PrivKeys Database](https://privatekeys.pw/) (Tool used to obtain test seeds / addresses) (**DO NOT** enter real private keys here)
 - addr_to_hash Python tool designed by Pieter Wuille (Used to convert non-zero addresses to hash files)
+- [kpurens](https://github.com/kpurens) Base project and original implementation that inspired this work.
 
 ## :grey_question: Frequently Asked Questions
 
