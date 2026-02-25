@@ -1,4 +1,4 @@
-## This is not my project!! FORK FROM https://github.com/kpurens Read license file.
+## Based on the original project by kpurens ! https://github.com/kpurens Read license file.
 
 # :unlock: CambucaHEX
 Cuda Secp256k1 HEX Private Key Recovery Tool. <br/>
@@ -164,12 +164,19 @@ The main improvements come from larger GPU registers - as threads won't have to 
 So using the latest generation hardware & CUDA drivers has a big advantage.
 ```
 
-## :gift: Support / Donations
+## :gift: Support / Donations (Original Author)
 
-If you enjoy this project please consider buying me a coffee.<br>
-Any support would be greatly appreciated.<br>
-
+This project is based on the original work created by **kpurens**.
+If you enjoy this project, please consider supporting the original author by buying them a coffee.  
+All credit for the base implementation belongs to them.
+Any support would be greatly appreciated ❤️
 [![coffeeSmol](https://user-images.githubusercontent.com/8969128/185217689-be09e29f-321f-4aaa-a20a-3a867a86d3f8.png)](https://buymeacoffee.com/kpurens)
+
+### This Project (Modifications & Maintenance)
+If you appreciate the improvements, linear mode, scripts, or continued development of this version, you can support me here:
+**Bitcoin (BTC): bc1qs850jrz5ktl5vwpma0sz40z29392wrzx9cevze
+
+
 
 ## :copyright: Credits / References
 - [Jean Luc PONS Secp256k1 Math library](https://github.com/JeanLucPons/VanitySearch) (Nice set of Secp256k1 Math operations / functions)
