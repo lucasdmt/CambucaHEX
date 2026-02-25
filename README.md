@@ -40,10 +40,10 @@ any two unknown HEX characters anywhere in the key.
 
 
 #### linear
-./Cambuca -l -p 4 -k e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+./Cambuca -l -p 4 -k e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b78501235
 
 #### Combination mode
-./Cambuca -c -p 2 -k e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+./Cambuca -c -p 2 -k e3b0144298fc10149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 
 #### Scattered HEX mode
 ./Cambuca -x -k e3b0c44298fc1c149afbf4c8996fb92427ae41ex649b934ca49x991bx85xbx5x
