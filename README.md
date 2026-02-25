@@ -1,15 +1,16 @@
-## Based on the original project by kpurens ! https://github.com/kpurens Read license file.
-
 # :unlock: CambucaHEX
-Cuda Secp256k1 HEX Private Key Recovery Tool. <br/>
+CambucaHEX is an alternative implementation and experimental extension
+based on the original work [kpurens](https://github.com/kpurens)
+Please read the original license file for attribution and usage terms.
+
+Tool for reconstructing partially known HEX RAW private keys.. <br/>
 Performs Secp256k1 Point Multiplication directly on GPU. <br/>
 
 ## :heavy_check_mark: When to use CambucaHEX
-CambucaHEX is designed for **private key recovery when hexadecimal characters are missing and scattered across the key**, rather than lost in a continuous or sequential range.  
-It is especially useful in scenarios where partial keys were corrupted, manually copied, or truncated at random positions.
-Example:
-<img width="1624" height="300" alt="exemple" src="https://github.com/user-attachments/assets/6c5dfba7-3e38-4893-a56e-55e3fb1b7a92" />
+CambucaHEX is designed for recovering private keys when missing hexadecimal characters are scattered across the key rather than forming a continuous range.
 
+It is particularly useful when keys were partially corrupted,manually copied, or truncated at random positions. Example:
+<img width="1624" height="300" alt="exemple" src="https://github.com/user-attachments/assets/6c5dfba7-3e38-4893-a56e-55e3fb1b7a92" />
 
 
 ## :x: When NOT to use CambucaHEX
