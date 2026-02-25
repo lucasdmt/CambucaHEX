@@ -22,7 +22,7 @@ GPUSecp::GPUSecp(
     const uint8_t *gTableXCPU,
     const uint8_t *gTableYCPU,
     const uint64_t *inputHashBufferCPU,
-    const uint8_t* privKeycpu, //lucas
+    const uint8_t* privKeyCPU, //lucas
     const int* posicoesCPU, //lucas
     int totalPosicoesCPUtemp  //lucas
     )
@@ -35,13 +35,13 @@ GPUSecp::GPUSecp(
   cudaDeviceProp deviceProp;
   CudaSafeCall(cudaGetDeviceProperties(&deviceProp, gpuId));
 
-  printf("GPU.gpuId: #%d \n", gpuId);
-  printf("GPU.deviceProp.name: %s \n", deviceProp.name);
-  printf("GPU.multiProcessorCount: %d \n", deviceProp.multiProcessorCount);
-  printf("GPU.BLOCKS_PER_GRID: %d \n", BLOCKS_PER_GRID);
-  printf("GPU.THREADS_PER_BLOCK: %d \n", THREADS_PER_BLOCK);
-  printf("GPU.CUDA_THREAD_COUNT: %d \n", COUNT_CUDA_THREADS);
-  printf("GPU.countHash160: %d \n", COUNT_INPUT_HASH);
+  printf("GPU.gpuId: #%d ", gpuId);
+  printf(" %s ", deviceProp.name);
+  printf("GPU.multiProcessorCount:%d ", deviceProp.multiProcessorCount);
+  printf("GPU.BLOCKS_PER_GRID:%d ", BLOCKS_PER_GRID);
+  printf("GPU.THREADS_PER_BLOCK:%d ", THREADS_PER_BLOCK);
+  printf("GPU.CUDA_THREAD_COUNT:%d ", COUNT_CUDA_THREADS);
+  printf("GPU.countHash160:%d \n", COUNT_INPUT_HASH);
 
 
   CudaSafeCall(cudaDeviceSetCacheConfig(cudaFuncCachePreferL1));
@@ -49,54 +49,54 @@ GPUSecp::GPUSecp(
 
   size_t limit = 0;
   cudaDeviceGetLimit(&limit, cudaLimitStackSize);
-  printf("cudaLimitStackSize: %u\n", (unsigned)limit);
+  printf("cudaLimitStackSize:%u ", (unsigned)limit);
   cudaDeviceGetLimit(&limit, cudaLimitPrintfFifoSize);
-  printf("cudaLimitPrintfFifoSize: %u\n", (unsigned)limit);
+  printf("cudaLimitPrintfFifoSize:%u ", (unsigned)limit);
   cudaDeviceGetLimit(&limit, cudaLimitMallocHeapSize);
-  printf("cudaLimitMallocHeapSize: %u\n", (unsigned)limit);
+  printf("cudaLimitMallocHeapSize:%u \n", (unsigned)limit);
   
-  printf("Allocating inputHashBuffer \n");
+  printf("Allocating: ");
+  printf("inputHashBuffer ");
   CudaSafeCall(cudaMalloc((void **)&inputHashBufferGPU, COUNT_INPUT_HASH * SIZE_LONG));
   CudaSafeCall(cudaMemcpy(inputHashBufferGPU, inputHashBufferCPU, COUNT_INPUT_HASH * SIZE_LONG, cudaMemcpyHostToDevice));
 
-  printf("Allocating gTableX \n");
+  printf("gTableX ");
   CudaSafeCall(cudaMalloc((void **)&gTableXGPU, COUNT_GTABLE_POINTS * SIZE_GTABLE_POINT));
   CudaSafeCall(cudaMemset(gTableXGPU, 0, COUNT_GTABLE_POINTS * SIZE_GTABLE_POINT));
   CudaSafeCall(cudaMemcpy(gTableXGPU, gTableXCPU, COUNT_GTABLE_POINTS * SIZE_GTABLE_POINT, cudaMemcpyHostToDevice));
 
-  printf("Allocating gTableY \n");
+  printf("gTableY ");
   CudaSafeCall(cudaMalloc((void **)&gTableYGPU, COUNT_GTABLE_POINTS * SIZE_GTABLE_POINT));
   CudaSafeCall(cudaMemset(gTableYGPU, 0, COUNT_GTABLE_POINTS * SIZE_GTABLE_POINT));
   CudaSafeCall(cudaMemcpy(gTableYGPU, gTableYCPU, COUNT_GTABLE_POINTS * SIZE_GTABLE_POINT, cudaMemcpyHostToDevice));
 
-  printf("Allocating outputBuffer \n");
+  printf("outputBuffer ");
   CudaSafeCall(cudaMalloc((void **)&outputBufferGPU, COUNT_CUDA_THREADS));
   CudaSafeCall(cudaHostAlloc(&outputBufferCPU, COUNT_CUDA_THREADS, cudaHostAllocWriteCombined | cudaHostAllocMapped));
 
-  printf("Allocating outputHashes \n");
+  printf("outputHashes ");
   CudaSafeCall(cudaMalloc((void **)&outputHashesGPU, COUNT_CUDA_THREADS * SIZE_HASH160));
   CudaSafeCall(cudaHostAlloc(&outputHashesCPU, COUNT_CUDA_THREADS * SIZE_HASH160, cudaHostAllocWriteCombined | cudaHostAllocMapped));
 
-  printf("Allocating outputPrivKeys \n");
+  printf("outputPrivKeys ");
   CudaSafeCall(cudaMalloc((void **)&outputPrivKeysGPU, COUNT_CUDA_THREADS * SIZE_PRIV_KEY));
   CudaSafeCall(cudaHostAlloc(&outputPrivKeysCPU, COUNT_CUDA_THREADS * SIZE_PRIV_KEY, cudaHostAllocWriteCombined | cudaHostAllocMapped));
 
-  //lucas
-    printf("Allocating privkeycPU\n");
-    CudaSafeCall(cudaMalloc((void**)&d_privKeyCPU, SIZE_PRIV_KEY * sizeof(uint8_t)));
-    CudaSafeCall(cudaMemcpy(d_privKeyCPU, privKeycpu, SIZE_PRIV_KEY * sizeof(uint8_t), cudaMemcpyHostToDevice));
 
-    printf("Allocating posicoesCPU\n");
-    CudaSafeCall(cudaMalloc((void**)&d_posicoesCPU, 65 * sizeof(int)));
-    CudaSafeCall(cudaMemcpy(d_posicoesCPU, posicoesCPU, 65 * sizeof(int), cudaMemcpyHostToDevice));
+    printf("privKey ");
+    CudaSafeCall(cudaMalloc((void**)&privKeyGPU, SIZE_PRIV_KEY * sizeof(uint8_t)));
+    CudaSafeCall(cudaMemcpy(privKeyGPU, privKeyCPU, SIZE_PRIV_KEY * sizeof(uint8_t), cudaMemcpyHostToDevice));
+
+    printf("posicoesGPU ");
+    CudaSafeCall(cudaMalloc((void**)&posicoesGPU, 65 * sizeof(int)));
+    CudaSafeCall(cudaMemcpy(posicoesGPU, posicoesCPU, 65 * sizeof(int), cudaMemcpyHostToDevice));
 
     d_totalPosicoesCPUtemp = totalPosicoesCPUtemp;
 
     //printf("Total posiçõesna gpu: %d\n",d_totalPosicoesCPUtemp);
 
-//lucas
 
-  printf("Allocation Complete \n");
+  printf("\nAllocation Complete \n");
   CudaSafeCall(cudaGetLastError());
 }
 
@@ -161,22 +161,17 @@ CudaRunSecp256k1Books(
   uint8_t privKeyLocal[32];
   memcpy(privKeyLocal, privKey, 32);
 
-  int thread_id = blockIdx.x * blockDim.x + threadIdx.x;
+  int thread_id = IDX_CUDA_THREAD;//blockIdx.x * blockDim.x) + threadIdx.x
   //long long result2 = iteration * COUNT_CUDA_THREADS * THREAD_MULT;
   long long result2 = (long long)iteration * COUNT_CUDA_THREADS * THREAD_MULT;
-
-
+  
+  //printf("thread_id %d\n", thread_id);//ULTIMA é COUNT_CUDA_THREADS-1 e a primeira 0 errrrrr
+  
   int start = thread_id * THREAD_MULT;
   int end = start + THREAD_MULT;
 
-  //printf("thread_id %d\n", thread_id);
-
-  
   for (int j = start; j < end; ++j){
      long long v = result2 + j;
-     /*if (threadIdx.x == 4) {
-        printf("[block %d] v=%lld ", blockIdx.x, v);
-     }*/
 
      for (int p = totalPosicoes - 1; p >= 0; --p) {
         uint8_t nib = v & 0xF;   // pega 1 hex digit
@@ -193,16 +188,12 @@ CudaRunSecp256k1Books(
      }
 
 
-
-      /*if (threadIdx.x == 4) {
-         printf("privKeyLocal: ");
+     /*if(thread_id == COUNT_CUDA_THREADS-1){
+         printf("id %d privKeyLocal: ",thread_id);
          for (int i = 31; i >= 0; i--) {
             printf("%02X", privKeyLocal[i]);
-         }
-      printf("\n");
-      }*/
-
-
+         }printf("\n");
+     }*/
 
 
 
@@ -224,7 +215,10 @@ CudaRunSecp256k1Books(
     GET_HASH_LAST_8_BYTES(hash160Last8Bytes, hash160);
     if (_BinarySearch(inputHashBufferGPU, COUNT_INPUT_HASH, hash160Last8Bytes) >= 0) {
 
-      //printf("possivel chave encontrada!: %s\n",localstr);
+         printf(" id %d privKeyLocal: ",thread_id);
+         for (int i = 31; i >= 0; i--) {
+            printf("%02X", privKeyLocal[i]);
+         }printf("\n");
 
       int idxCudaThread = IDX_CUDA_THREAD;
       outputBufferGPU[idxCudaThread] += 1;
@@ -273,8 +267,8 @@ void GPUSecp::doIterationSecp256k1Books(int iteration) {
     outputBufferGPU,
     outputHashesGPU,
     outputPrivKeysGPU,
-    d_privKeyCPU,              //lucas
-    d_posicoesCPU,         //lucas
+    privKeyGPU,
+    posicoesGPU,
     d_totalPosicoesCPUtemp //lucas
     );
 
@@ -315,6 +309,34 @@ void GPUSecp::doPrintOutput() {
   }
 }
 
+void GPUSecp::updatemodohex(
+    const int* posicoesCPU,
+    int totalPosicoesCPU
+)
+{
+    // se tamanho mudou, realoca
+    if (totalPosicoesCPU != d_totalPosicoesCPUtemp)
+    {
+        if (posicoesGPU != nullptr)
+            CudaSafeCall(cudaFree(posicoesGPU));
+
+        CudaSafeCall(cudaMalloc(
+            (void**)&posicoesGPU,
+            totalPosicoesCPU * sizeof(int)
+        ));
+
+        d_totalPosicoesCPUtemp = totalPosicoesCPU;
+    }
+
+    // copia CPU → GPU
+    CudaSafeCall(cudaMemcpy(
+        posicoesGPU,
+        posicoesCPU,
+        totalPosicoesCPU * sizeof(int),
+        cudaMemcpyHostToDevice
+    ));
+}
+
 void GPUSecp::doFreeMemory() {
   printf("\nGPUSecp Freeing memory... ");
 
@@ -332,8 +354,8 @@ void GPUSecp::doFreeMemory() {
   CudaSafeCall(cudaFreeHost(outputPrivKeysCPU));
   CudaSafeCall(cudaFree(outputPrivKeysGPU));
 
-  CudaSafeCall(cudaFree(d_privKeyCPU)); //lucas
-  CudaSafeCall(cudaFree(d_posicoesCPU)); //lucas
+  CudaSafeCall(cudaFree(privKeyGPU));
+  CudaSafeCall(cudaFree(posicoesGPU));
 
   printf("Acabou \n");
 }
