@@ -164,7 +164,11 @@ The main improvements come from larger GPU registers - as threads won't have to 
 So using the latest generation hardware & CUDA drivers has a big advantage.
 ```
 
-## :gift: Support / Donations (Original Author)
+## :gift: Support / Donations
+
+### This Project (Modifications & Maintenance)
+If this project is useful to you, you can support its development here:
+**Bitcoin (BTC): bc1qs850jrz5ktl5vwpma0sz40z29392wrzx9cevze
 
 This project is based on the original work created by **kpurens**.
 If you enjoy this project, please consider supporting the original author by buying them a coffee.  
@@ -172,9 +176,7 @@ All credit for the base implementation belongs to them.
 Any support would be greatly appreciated ❤️
 [Buy a coffee ☕](https://buymeacoffee.com/kpurens)
 
-### This Project (Modifications & Maintenance)
-If you appreciate the improvements, linear mode, scripts, or continued development of this version, you can support me here:
-**Bitcoin (BTC): bc1qs850jrz5ktl5vwpma0sz40z29392wrzx9cevze
+
 
 
 
