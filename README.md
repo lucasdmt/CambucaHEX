@@ -172,8 +172,6 @@ If this project is useful to you, you can support its development here:
 
 This project is based on the original work created by **kpurens**.
 If you enjoy this project, please consider supporting the original author by buying them a coffee.  
-All credit for the base implementation belongs to them.
-Any support would be greatly appreciated ❤️
 [Buy a coffee ☕](https://buymeacoffee.com/kpurens)
 
 
