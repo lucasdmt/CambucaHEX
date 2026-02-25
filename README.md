@@ -15,6 +15,13 @@ It is particularly useful when keys were partially corrupted,manually copied, or
 Scattered HEX mode. Use when unknown characters are distributed across the key. Unknown characters must be marked with x.
 <img width="1624" height="300" alt="exemple" src="https://github.com/user-attachments/assets/6c5dfba7-3e38-4893-a56e-55e3fb1b7a92" />
 
+### -c / --combination
+Combination mode tests all combinations of unknown HEX positions
+across the entire key space.
+The value of `-p` defines how many corrupted characters may exist,
+independent of their position. For example, `-p 2` searches for
+any two unknown HEX characters anywhere in the key.
+
 ### -l / --linear
 Linear mode uses a sliding window approach over the private key.
 Instead of testing all unknown positions simultaneously, a fixed‑size window moves across the key and brute‑forces consecutive HEX characters within that window.
@@ -22,12 +29,7 @@ The key will only be recovered if the corrupted or missing characters are locate
 This mode is primarily provided as a conceptual / experimental approach.
 Because the search is sequential, specialized tools that use incremental point‑addition techniques can achieve significantly higher performance for this type of search. 
 
-### -c / --combination
-Combination mode tests all combinations of unknown HEX positions
-across the entire key space.
-The value of `-p` defines how many corrupted characters may exist,
-independent of their position. For example, `-p 2` searches for
-any two unknown HEX characters anywhere in the key.
+
 
 | Option              | Description                                                                                      |
 | ------------------- | ------------------------------------------------------------------------------------------------ |
@@ -39,14 +41,14 @@ any two unknown HEX characters anywhere in the key.
 | `-h, --help`        | Show the help message.                                                                           |
 
 
-#### linear
-./Cambuca -l -p 4 -k e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b78501235
+#### Scattered HEX mode
+./Cambuca -x -k e3b0c44298fc1c149afbf4c8996fb92427ae41ex649b934ca49x991bx85xbx5x
 
 #### Combination mode
 ./Cambuca -c -p 2 -k e3b0144298fc10149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 
-#### Scattered HEX mode
-./Cambuca -x -k e3b0c44298fc1c149afbf4c8996fb92427ae41ex649b934ca49x991bx85xbx5x
+#### linear
+./Cambuca -l -p 4 -k e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b78501235
 
 ## :x: When NOT to use CambucaHEX
 - If the missing characters are **sequential or form a continuous range**, other specialized tools may be more efficient. CambucaHEX should be avoided **when it's possible to derive private keys from each-other.** <br> In such cases CambucaHEX is sub-optimal as it would be much quicker to re-use already calculated public keys.<br>
