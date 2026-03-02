@@ -28,7 +28,7 @@ Instead of testing all unknown positions simultaneously, a fixed‑size window m
 The key will only be recovered if the corrupted or missing characters are located inside the active window region.
 This mode is primarily provided as a conceptual / experimental approach.
 Because the search is sequential, specialized tools that use incremental point‑addition techniques can achieve significantly higher performance for this type of search. 
-###<>
+### <>
 | Option              | Description                                                                                      |
 | ------------------- | ------------------------------------------------------------------------------------------------ |
 | `-x, --hexx`        | Scattered HEX mode. Use when unknown characters are distributed; mark unknowns with `x`.         |
