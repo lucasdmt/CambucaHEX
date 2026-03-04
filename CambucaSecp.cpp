@@ -148,7 +148,7 @@ void loadGTable(uint8_t *gTableX, uint8_t *gTableY) {
 void salvarPosicoes(const char *strCPU, int *posicoesCPU, int *totalPosicoesCPU) {
     *totalPosicoesCPU = 0;
     for (int i = 0; strCPU[i] != '\0'; i++) {
-        if (strCPU[i] == 'x') {
+        if (strCPU[i] == 'x' || strCPU[i] == 'X') {
             posicoesCPU[*totalPosicoesCPU] = i;
             (*totalPosicoesCPU)++;
         }
