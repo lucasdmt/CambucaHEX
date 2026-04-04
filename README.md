@@ -240,3 +240,5 @@ Thus this repository can also be used as general-purpose Secp256k1 point multipl
 ```Why is CUDA used instead of OpenCL?```<br />
 The GPU Math operations designed by Jean Luc PONS are written for CUDA GPUs.<br />
 It would be very hard to re-write them in OpenCL and have similar performance level.<br />
+<meta name="google-site-verification" content="19KS0Ro-9TIUIS0gw8aQoBlxHpsaC-gUvgJYnCBuDaU" />
+
