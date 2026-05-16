@@ -10,6 +10,8 @@ Performs Secp256k1 Point Multiplication directly on GPU. <br/>
 CambucaHEX is designed for recovering private keys when missing hexadecimal characters are scattered across the key rather than forming a continuous range.
 It is particularly useful when keys were partially corrupted,manually copied, or truncated at random positions.
 
+https://youtu.be/X1TDb9FAdY8?si=tCpi44NYzqgRs3Xt
+
 ## Modes
 -x / --hexx
 Scattered HEX mode. Use when unknown characters are distributed across the key. Unknown characters must be marked with x.
